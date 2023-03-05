@@ -26,6 +26,7 @@ var Analyzer = &analysis.Analyzer{
 func run(pass *analysis.Pass) (any, error) {
 	inspector, ok := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
 	if !ok {
+		// explicit check: should never be false due to inspect.Analyzer dependency
 		return nil, fmt.Errorf("unexpected type: %T", pass.ResultOf[inspect.Analyzer])
 	}
 	nodeFilter := []ast.Node{
@@ -35,6 +36,7 @@ func run(pass *analysis.Pass) (any, error) {
 		sel := node.(*ast.SelectorExpr)
 		pkgIdent, ok := sel.X.(*ast.Ident)
 		if !ok {
+			// explicit check: though nil map lookup below would catch this too
 			return
 		}
 		pkgName, ok := pass.TypesInfo.Uses[pkgIdent].(*types.PkgName)
