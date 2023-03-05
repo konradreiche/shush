@@ -15,7 +15,7 @@ jobs:
       image: golang:1.20
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: go test ./...
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
