@@ -1,3 +1,6 @@
+// Package shush defines an Analyzer that reports usage of `fmt.Println`
+// statements which may have been unintentionally left in the code for
+// debugging purposes.
 package shush
 
 import (
@@ -15,6 +18,8 @@ const Doc = `report fmt.Println statements
 Find fmt.Println statements which may have been unintentionally left in the
 code for debugging purposes.`
 
+// Analyzer defines the analysis function to find and report fmt.Println
+// statements. It can be referenced in an analysis driver.
 var Analyzer = &analysis.Analyzer{
 	Name:             "shush",
 	Doc:              Doc,
